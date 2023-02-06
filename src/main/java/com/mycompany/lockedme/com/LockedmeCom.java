@@ -17,10 +17,10 @@ import java.util.Scanner;
 public class LockedmeCom {
 
     public static void main(String[] args) {
-        System.out.print("welcome to Lockedme.com File Search \n Press 1- to list all files"
+        System.out.print("welcome to Lockedme.com File Search \n Press 1- add file"
                 + "2- search files 3- delete files 4-close the file \n"
                 + "Choice: ");
-        String path = "/home/muhammad/lockedme.com";
+        String path = "/home/muhammad/lockedme.com/";
         File file = new File(path);
         File[] listfiles = file.listFiles();
         ArrayList<String> fileArray = new ArrayList<>();
@@ -34,8 +34,12 @@ public class LockedmeCom {
         
         switch (ch) {
             case 1:
-                for(String filename:fileArray){
-                  System.out.println(filename);
+                choosedname = in.next();
+                if(fileArray.contains(choosedname)){
+                    System.out.println("file is already exists");
+                }
+                else{
+                    File filecreated = new File(path+choosedname);
                 }
                 break;
             case 2:
@@ -47,22 +51,21 @@ public class LockedmeCom {
                 else{
                     System.err.print("your name "+choosedname +" not exists ");
                 }
-            case 3 :
+                break;
+            case 3:
                 System.out.print("enter the deleted file name ");
                 choosedname = in.next();
                 if(fileArray.contains(choosedname)){
-                    File filedelete = new File(path+"/"+choosedname);
+                    File filedelete = new File(path+choosedname);
                     System.out.println(filedelete.getAbsoluteFile());
                     filedelete.delete();
-                    if(filedelete.delete()){
-                        System.out.println("File Deleted");
-                    }
+                   
                 }
                 else{
                     System.out.println("file enter not exits");
                 }
                 break;
-            case 4 :
+            case 4:
                 System.exit(0);
                 break;
                 
