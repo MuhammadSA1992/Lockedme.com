@@ -4,6 +4,12 @@
 
 package com.mycompany.lockedme.com;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+
 /**
  *
  * @author muhammad
@@ -11,6 +17,60 @@ package com.mycompany.lockedme.com;
 public class LockedmeCom {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-    }
+        System.out.print("welcome to Lockedme.com File Search \n Press 1- to list all files"
+                + "2- search files 3- delete files 4-close the file \n"
+                + "Choice: ");
+        String path = "/home/muhammad/lockedme.com";
+        File file = new File(path);
+        File[] listfiles = file.listFiles();
+        ArrayList<String> fileArray = new ArrayList<>();
+        Scanner in  = new Scanner(System.in);
+        for (File listfile : listfiles) {
+          fileArray.add(listfile.getName());
+        }
+        Collections.sort(fileArray);
+        int ch = in.nextInt();
+        String choosedname;
+        
+        switch (ch) {
+            case 1:
+                for(String filename:fileArray){
+                  System.out.println(filename);
+                }
+                break;
+            case 2:
+                System.out.print("enter the file name: ");
+                choosedname = in.next();
+                if(fileArray.contains(choosedname)){
+                    System.out.println(choosedname);
+                }
+                else{
+                    System.err.print("your name "+choosedname +" not exists ");
+                }
+            case 3 :
+                System.out.print("enter the deleted file name ");
+                choosedname = in.next();
+                if(fileArray.contains(choosedname)){
+                    File filedelete = new File(path+"/"+choosedname);
+                    System.out.println(filedelete.getAbsoluteFile());
+                    filedelete.delete();
+                    if(filedelete.delete()){
+                        System.out.println("File Deleted");
+                    }
+                }
+                else{
+                    System.out.println("file enter not exits");
+                }
+                break;
+            case 4 :
+                System.exit(0);
+                break;
+                
+            default: System.out.println("this not valid optipn");
+        }
+                
+        }
+        
 }
+    
+
